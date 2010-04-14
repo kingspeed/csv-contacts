@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ContactManager!</string>
+    <string name="app_name">ContactManager</string>
+    <string name="button_text">Adelante</string>
+    <string name="error_write">No se puede escribir en la carpeta download de la SD</string>
+</resources>

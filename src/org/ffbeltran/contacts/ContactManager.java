@@ -1,0 +1,140 @@
+package org.ffbeltran.contacts;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.ffbeltran.contacts.objects.MyAddress;
+import org.ffbeltran.contacts.objects.MyContact;
+import org.ffbeltran.contacts.objects.MyInstantMessenger;
+import org.ffbeltran.contacts.objects.MyOrganization;
+import org.ffbeltran.contacts.objects.MyPhone;
+
+import android.content.ContentResolver;
+import android.database.Cursor;
+import android.provider.Contacts;
+import android.provider.Contacts.People;
+
+public class ContactManager {
+    
+    public List<MyContact> requestContacts(ContentResolver cr) {
+        List<MyContact> people = new ArrayList<MyContact>();
+        Cursor cur = cr.query(People.CONTENT_URI, null, null, null, null);
+        String id;
+        String name;
+        String note;
+        MyContact myContact;
+        if (cur.getCount() > 0) {
+            while (cur.moveToNext()) {
+                id = cur.getString(cur.getColumnIndex(People._ID));
+                name = cur.getString(cur.getColumnIndex(People.DISPLAY_NAME));
+                note = cur.getString(cur.getColumnIndex(People.NOTES));
+                myContact = new MyContact(id);
+                myContact.setName(name);
+                myContact.setNotes(note);
+                myContact.setPhones(requestPhoneNumbers(cr, myContact.getId()));
+                myContact.setEmails(requestEmails(cr, myContact.getId()));
+                myContact.setAddresses(requestAddresses(cr, myContact.getId()));
+                myContact.setInstantMessengers(requestInstantMessenger(cr, myContact.getId()));
+                myContact.setOrganizations(requestOrganizations(cr, myContact.getId()));
+                people.add(myContact);
+            }
+        }
+        return people;
+    }
+    
+    public List<MyPhone> requestPhoneNumbers(ContentResolver cr, String idContact) {
+        Cursor cur = cr.query(People.CONTENT_URI, null, null, null, null);
+        int columnIndex = cur.getColumnIndex(People.PRIMARY_PHONE_ID);
+        List<MyPhone> phones = new ArrayList<MyPhone>();
+        if (columnIndex > 0) {
+            Cursor pCur = cr.query(Contacts.Phones.CONTENT_URI, null,
+                    Contacts.Phones.PERSON_ID + " = ?", new String[] { idContact }, null);
+            MyPhone phone;
+            String number;
+            String type;            
+            while (pCur.moveToNext()) {
+                number = pCur.getString(pCur.getColumnIndex(Contacts.Phones.NUMBER));
+                type = pCur.getString(pCur.getColumnIndex(Contacts.Phones.TYPE));
+                phone = new MyPhone(number, type);
+                phones.add(phone);
+            }
+            pCur.close();
+        }
+        return phones;
+    }
+    
+    public List<String> requestEmails(ContentResolver cr, String idContact) {
+        Cursor emailCur = cr.query(Contacts.ContactMethods.CONTENT_EMAIL_URI,
+                null, Contacts.ContactMethods.PERSON_ID + " = ?",
+                new String[] { idContact }, null);
+        List<String> emails = new ArrayList<String>();
+        while (emailCur.moveToNext()) {
+            emails.add(emailCur.getString(emailCur
+                    .getColumnIndex(Contacts.ContactMethods.DATA)));
+        }
+        emailCur.close();
+        return emails;
+    }
+    
+    public List<MyAddress> requestAddresses(ContentResolver cr, String idContact) {
+        String addrWhere = Contacts.ContactMethods.PERSON_ID 
+                + " = ? AND " + Contacts.ContactMethods.KIND + " = ?"; 
+        String[] addrWhereParams = new String[]{ idContact, 
+                Integer.toString(Contacts.KIND_POSTAL)};
+        Cursor addrCur = cr.query(Contacts.ContactMethods.CONTENT_URI, null,
+                addrWhere, addrWhereParams, null);
+        List<MyAddress> addresses = new ArrayList<MyAddress>();
+        MyAddress address;
+        String addr;
+        String type;
+        while (addrCur.moveToNext()) { 
+            addr = addrCur.getString(addrCur.getColumnIndex(Contacts.ContactMethodsColumns.DATA));
+            type = addrCur.getString(addrCur.getColumnIndex(Contacts.ContactMethodsColumns.TYPE));
+            address = new MyAddress(addr, type);
+            addresses.add(address);
+        }
+        addrCur.close();
+        return addresses;
+    }
+    
+    public List<MyInstantMessenger> requestInstantMessenger(ContentResolver cr, String idContact) {
+        String imWhere = Contacts.ContactMethods.PERSON_ID + " = ? AND "
+                + Contacts.ContactMethods.KIND + " = ?";
+        String[] imWhereParams = new String[] { idContact,
+                Integer.toString(Contacts.KIND_IM) };
+        Cursor imCur = cr.query(Contacts.ContactMethods.CONTENT_URI, null,
+                imWhere, imWhereParams, null);
+        List<MyInstantMessenger> instantMessengers = new ArrayList<MyInstantMessenger>();
+        MyInstantMessenger im;
+        String imName;
+        String imType;
+        if (imCur.moveToFirst()) {
+            imName = imCur.getString(imCur.getColumnIndex(Contacts.ContactMethodsColumns.DATA));
+            imType = imCur.getString(imCur.getColumnIndex(Contacts.ContactMethodsColumns.TYPE));
+            im = new MyInstantMessenger(imName, imType);
+            instantMessengers.add(im);
+        }
+        imCur.close();
+        return instantMessengers;
+    }
+    
+    public List<MyOrganization> requestOrganizations(ContentResolver cr, String idContact) {
+        String orgWhere = Contacts.ContactMethods.PERSON_ID + " = ?"; 
+        String[] orgWhereParams = new String[]{ idContact }; 
+        Cursor orgCur = cr.query(Contacts.Organizations.CONTENT_URI, 
+                  null, orgWhere, orgWhereParams, null);
+        List<MyOrganization> organizations = new ArrayList<MyOrganization>();
+        MyOrganization myOrganization;
+        String orgName;
+        String title;
+        if (orgCur.moveToFirst()) { 
+            orgName = orgCur.getString(orgCur.getColumnIndex(Contacts.Organizations.COMPANY));
+            title = orgCur.getString(orgCur.getColumnIndex(Contacts.Organizations.TITLE));
+            myOrganization = new MyOrganization(orgName, title);
+            organizations.add(myOrganization);
+        } 
+        orgCur.close();
+        return organizations;
+    }
+
+}
