@@ -11,23 +11,26 @@ import org.ffbeltran.contacts.objects.formatters.ContactFormatter;
 public class FileManager {
     
     public static final int SUCCESS = 0;
-    public static final int ERROR_NOT_WRITABLE = 1;
-    public static final int ERROR_EXCEPTION = 2;
+    public static final int ERROR_NOT_EXISTS = 1;
+    public static final int ERROR_NOT_WRITABLE = 2;
+    public static final int ERROR_EXCEPTION = 3;
     
     public int createFile(List<MyContact> people, String dirName, String fileName, ContactFormatter formatter) {
         FileWriter f = null;
         try {
             File file = new File(dirName);
-            if (file.canWrite()) {
-                f = new FileWriter(dirName + fileName);
-                String line;
-                for (MyContact myContact : people) {
-                    line = formatter.formatContact(myContact);
-                    f.append(line + "\n");
-                }
-            } else {
+            if (!file.exists()) {
+                return ERROR_NOT_EXISTS;
+            }
+            if (!file.canWrite()) {
                 return ERROR_NOT_WRITABLE;
             }
+            f = new FileWriter(dirName + fileName);
+            String line;
+            for (MyContact myContact : people) {
+                line = formatter.formatContact(myContact);
+                f.append(line + "\n");
+            }            
         } catch (IOException e) {
             return ERROR_EXCEPTION;
         } finally {
@@ -38,6 +41,11 @@ public class FileManager {
                     return ERROR_EXCEPTION;
                 }
             }
+        }
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         return SUCCESS;
     }
