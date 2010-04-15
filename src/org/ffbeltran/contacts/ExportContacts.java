@@ -20,15 +20,6 @@ import android.widget.TextView;
 
 public class ExportContacts extends Activity {
     
-    private static final int[] prefsInt = {
-        R.string.field_phone,
-        R.string.field_email,
-        R.string.field_address,
-        R.string.field_im,
-        R.string.field_organization,
-        R.string.field_note
-    };
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +30,9 @@ public class ExportContacts extends Activity {
         
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         Map<Integer, Boolean> prefs = new HashMap<Integer, Boolean>();
-        for (int i = 0; i < prefsInt.length; i++) {
-            prefs.put(prefsInt[i], settings.getBoolean(getString(prefsInt[i]), true));
+        for (int i = 0; i < Preferences.prefsInt.length; i++) {
+            prefs.put(Preferences.prefsInt[i], 
+                    settings.getBoolean(getString(Preferences.prefsInt[i]), true));
         }
         
         console.append("Buscando contactos...\n");
