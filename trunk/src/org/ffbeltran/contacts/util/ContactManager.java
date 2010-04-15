@@ -1,8 +1,10 @@
-package org.ffbeltran.contacts;
+package org.ffbeltran.contacts.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.ffbeltran.contacts.R;
 import org.ffbeltran.contacts.objects.MyAddress;
 import org.ffbeltran.contacts.objects.MyContact;
 import org.ffbeltran.contacts.objects.MyInstantMessenger;
@@ -16,7 +18,7 @@ import android.provider.Contacts.People;
 
 public class ContactManager {
     
-    public List<MyContact> requestContacts(ContentResolver cr) {
+    public List<MyContact> requestContacts(ContentResolver cr, Map<Integer, Boolean> prefs) {
         List<MyContact> people = new ArrayList<MyContact>();
         String[] columns = {People._ID, People.DISPLAY_NAME, People.NOTES, People.TYPE};        
         Cursor cur = cr.query(People.CONTENT_URI, columns, null, null, null);
@@ -31,12 +33,24 @@ public class ContactManager {
                 note = cur.getString(cur.getColumnIndex(People.NOTES));
                 myContact = new MyContact(id);
                 myContact.setName(name);
-                myContact.setNotes(note);
-                myContact.setPhones(requestPhoneNumbers(cr, myContact.getId()));
-                myContact.setEmails(requestEmails(cr, myContact.getId()));
-                myContact.setAddresses(requestAddresses(cr, myContact.getId()));
-                myContact.setInstantMessengers(requestInstantMessenger(cr, myContact.getId()));
-                myContact.setOrganizations(requestOrganizations(cr, myContact.getId()));
+                if (prefs.get(R.string.field_note)) {
+                    myContact.setNotes(note);
+                }
+                if (prefs.get(R.string.field_phone)) {
+                    myContact.setPhones(requestPhoneNumbers(cr, myContact.getId()));
+                }
+                if (prefs.get(R.string.field_email)) {
+                    myContact.setEmails(requestEmails(cr, myContact.getId()));
+                }
+                if (prefs.get(R.string.field_address)) {
+                    myContact.setAddresses(requestAddresses(cr, myContact.getId()));
+                }
+                if (prefs.get(R.string.field_im)) {
+                    myContact.setInstantMessengers(requestInstantMessenger(cr, myContact.getId()));
+                }
+                if (prefs.get(R.string.field_organization)) {
+                    myContact.setOrganizations(requestOrganizations(cr, myContact.getId()));
+                }
                 people.add(myContact);
             }
         }

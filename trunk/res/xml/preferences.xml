@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference 
+        android:key="@string/field_phone" 
+        android:title="@string/field_phone_title" 
+        android:defaultValue="true"/>
+    <CheckBoxPreference 
+        android:key="@string/field_email" 
+        android:title="@string/field_email_title" 
+        android:defaultValue="true"/>
+    <CheckBoxPreference 
+        android:key="@string/field_address" 
+        android:title="@string/field_address_title" 
+        android:defaultValue="true"/>
+    <CheckBoxPreference 
+        android:key="@string/field_im" 
+        android:title="@string/field_im_title" 
+        android:defaultValue="true"/>
+    <CheckBoxPreference 
+        android:key="@string/field_organization" 
+        android:title="@string/field_organization_title" 
+        android:defaultValue="true"/>
+    <CheckBoxPreference 
+        android:key="@string/field_note" 
+        android:title="@string/field_note_title" 
+        android:defaultValue="true"/>
+</PreferenceScreen>
