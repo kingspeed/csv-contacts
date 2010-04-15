@@ -32,9 +32,7 @@ public class ContactManager {
                 myContact = new MyContact(id);
                 myContact.setName(name);
                 myContact.setNotes(note);
-                if (cur.getColumnIndex(People.PRIMARY_PHONE_ID) > 0) {
-                    myContact.setPhones(requestPhoneNumbers(cr, myContact.getId()));                    
-                }
+                myContact.setPhones(requestPhoneNumbers(cr, myContact.getId()));
                 myContact.setEmails(requestEmails(cr, myContact.getId()));
                 myContact.setAddresses(requestAddresses(cr, myContact.getId()));
                 myContact.setInstantMessengers(requestInstantMessenger(cr, myContact.getId()));
