@@ -23,53 +23,109 @@ public class CSVFormatter implements ContactFormatter {
         result.append(myContact.getName());
         if (fields.get(R.string.field_phone)) {
             result.append(";");
-            if (myContact.getPhones() != null) {
-                for (MyPhone phone : myContact.getPhones()) {
-                    result.append(phone.getNumber());
-                }
-            }
+            result.append(formatPhones(myContact));
         }
         
         if (fields.get(R.string.field_email)) {
             result.append(";");
-            if (myContact.getEmails() != null) {
-                for (String email : myContact.getEmails()) {
-                    result.append(email);
-                }
-            }
+            result.append(formatEMails(myContact));
         }
         
         if (fields.get(R.string.field_address)) {
             result.append(";");
-            if (myContact.getAddresses() != null) {
-                for (MyAddress address : myContact.getAddresses()) {
-                    result.append(address.getAddress());
-                }
-            }
+            result.append(formatAddresses(myContact));
         }
         
         if (fields.get(R.string.field_im)) {
             result.append(";");
-            if (myContact.getInstantMessengers() != null) {
-                for (MyInstantMessenger im : myContact.getInstantMessengers()) {
-                    result.append(im.getName());
-                }
-            }
+            result.append(formatIM(myContact));
         }
         
         if (fields.get(R.string.field_organization)) {
             result.append(";");
-            if (myContact.getOrganizations() != null) {
-                for (MyOrganization org : myContact.getOrganizations()) {
-                    result.append(org.getCompany() + "-" + org.getTitle());
-                }
-            }
+            result.append(formatOrganizations(myContact));
         }
         
         if (fields.get(R.string.field_note)) {
             result.append(";");
-            result.append(myContact.getNotes());
+            result.append(formatNotes(myContact));
         }
+        return result.toString();
+    }
+    
+    private String formatPhones(MyContact myContact) {
+        StringBuilder result = new StringBuilder();
+        if (myContact.getPhones() != null) {
+            for (MyPhone phone : myContact.getPhones()) {
+                result.append(phone.getNumber());
+                result.append(":");
+            }
+            if (myContact.getPhones().size()>1) {
+                result.deleteCharAt(result.length()-1);
+            }
+        }
+        return result.toString();
+    }
+    
+    private String formatEMails(MyContact myContact) {
+        StringBuilder result = new StringBuilder();
+        if (myContact.getEmails() != null) {
+            for (String email : myContact.getEmails()) {
+                result.append(email);
+                result.append(":");
+            }
+            if (myContact.getEmails().size()>1) {
+                result.deleteCharAt(result.length()-1);
+            }
+        }
+        return result.toString();
+    }
+    
+    private String formatAddresses(MyContact myContact) {
+        StringBuilder result = new StringBuilder();
+        if (myContact.getAddresses() != null) {
+            for (MyAddress address : myContact.getAddresses()) {
+                result.append(address.getAddress());
+                result.append(":");
+            }
+            if (myContact.getAddresses().size()>1) {
+                result.deleteCharAt(result.length()-1);
+            }
+        }
+        return result.toString();
+    }
+    
+    private String formatIM(MyContact myContact) {
+        StringBuilder result = new StringBuilder();
+        if (myContact.getInstantMessengers() != null) {
+            for (MyInstantMessenger im : myContact.getInstantMessengers()) {
+                result.append(im.getName());
+                result.append(":");
+            }
+            if (myContact.getInstantMessengers().size()>1) {
+                result.deleteCharAt(result.length()-1);
+            }
+        }
+        return result.toString();
+    }
+    
+    private String formatOrganizations(MyContact myContact) {
+        StringBuilder result = new StringBuilder();
+        if (myContact.getOrganizations() != null) {
+            for (MyOrganization org : myContact.getOrganizations()) {
+                result.append(org.getCompany() + "-" + org.getTitle());
+                result.append(":");
+            }
+            if (myContact.getOrganizations().size()>1) {
+                result.deleteCharAt(result.length()-1);
+            }
+        }
+        return result.toString();
+    }
+    
+    private String formatNotes(MyContact myContact) {
+        StringBuilder result = new StringBuilder();
+        result.append(myContact.getNotes());
         return result.toString();
     }
 
