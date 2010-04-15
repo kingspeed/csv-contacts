@@ -18,6 +18,12 @@ import android.provider.Contacts.People;
 
 public class ContactManager {
     
+    public int contactsCount(ContentResolver cr) {
+        String[] columns = { People._ID };
+        Cursor cur = cr.query(People.CONTENT_URI, columns, null, null, null);
+        return cur.getCount();
+    }
+    
     public List<MyContact> requestContacts(ContentResolver cr, Map<Integer, Boolean> prefs) {
         List<MyContact> people = new ArrayList<MyContact>();
         String[] columns = {People._ID, People.DISPLAY_NAME, People.NOTES, People.TYPE};        

@@ -43,7 +43,7 @@ public class ExportContacts extends Activity {
         console.append("Exportando a CSV...\n");
         FileManager fm = new FileManager();
         ContactFormatter formatter = new CSVFormatter(prefs);
-        fm.createFile(contacts, "/sdcard/download/", "contacts.txt", formatter);        
+        int result = fm.createFile(contacts, "/sdcard/download/", "contacts.txt", formatter);        
         
         console.append(getString(R.string.export_finished) + "\n");
         
