@@ -60,6 +60,11 @@ public class ContactManager {
                 people.add(myContact);
             }
         }
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return people;
     }
     
