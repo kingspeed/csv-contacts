@@ -3,15 +3,37 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-    <TextView
-        android:id="@+id/texto" 
-        android:layout_width="fill_parent" 
-        android:layout_height="wrap_content" 
-        />
-    <Button 
-        android:id="@+id/boton" 
-        android:text="@string/button_text" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content"/>
+    android:gravity="center">
+	<TextView  
+	   	android:gravity="center"
+		android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:text="@string/main_title"
+	    android:textSize="25sp"
+	    android:textStyle="bold"
+	    android:layout_marginBottom="25dip"/>
+	<Button
+	   	android:id="@id/export_button"
+	   	android:layout_gravity="center"
+	   	android:layout_width="200dip"
+	   	android:layout_height="wrap_content"
+	   	android:text="@string/export_button"/>
+  	<Button
+	   	android:id="@id/preferences_button"
+	   	android:layout_gravity="center"
+	   	android:layout_width="200dip"
+	   	android:layout_height="wrap_content"
+	   	android:text="@string/preferences_button"/>
+	<Button
+	   	android:id="@id/about_button"
+	   	android:layout_gravity="center"
+	   	android:layout_width="200dip"
+	   	android:layout_height="wrap_content"
+	   	android:text="@string/about_button"/>
+    <Button
+        android:id="@id/exit_button"
+        android:layout_gravity="center"
+        android:layout_width="200dip"
+        android:layout_height="wrap_content"
+        android:text="@string/exit_button"/>
 </LinearLayout>
