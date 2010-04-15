@@ -10,7 +10,11 @@ import org.ffbeltran.contacts.objects.formatters.ContactFormatter;
 
 public class FileManager {
     
-    public void createFile(List<MyContact> people, String dirName, String fileName, ContactFormatter formatter) {
+    public static final int SUCCESS = 0;
+    public static final int ERROR_NOT_WRITABLE = 1;
+    public static final int ERROR_EXCEPTION = 2;
+    
+    public int createFile(List<MyContact> people, String dirName, String fileName, ContactFormatter formatter) {
         FileWriter f = null;
         try {
             File file = new File(dirName);
@@ -22,19 +26,20 @@ public class FileManager {
                     f.append(line + "\n");
                 }
             } else {
-                //textView.setText(getString(R.string.error_write));
+                return ERROR_NOT_WRITABLE;
             }
         } catch (IOException e) {
-            //textView.setText(e.getMessage());
+            return ERROR_EXCEPTION;
         } finally {
             if (f != null) {
                 try {
                     f.close();
                 } catch (IOException e) {
-                    
+                    return ERROR_EXCEPTION;
                 }
             }
         }
+        return SUCCESS;
     }
 
 }
