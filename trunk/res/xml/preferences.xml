@@ -29,4 +29,9 @@
             android:title="@string/field_note_title" 
             android:defaultValue="true"/>
     </PreferenceScreen>
+    <EditTextPreference 
+        android:key="@string/file_name"
+        android:title="@string/preferences_file_title" 
+        android:summary="@string/preferences_file_summary"
+        android:defaultValue="@string/default_file_name"/>
 </PreferenceScreen>
