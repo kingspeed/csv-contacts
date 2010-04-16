@@ -17,8 +17,7 @@
     <string name="preferences_fields_title">Export Fields</string>
     <string name="preferences_fields_summary">Select the fields to export</string>
     <string name="preferences_error_file">
-        Only letters, numbers and underscore are allowed.
-        \n Optionally you can provide an extension of two or three characters
+        Only letters, numbers and underscore are allowed and optionally you can provide an extension of two or three characters. By default %s be used.
     </string>
     <string name="preferences_file_title">File name</string>
     <string name="preferences_file_summary">Select the name of CSV file</string>

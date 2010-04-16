@@ -44,7 +44,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
     
     private void showErrorFilename() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);        
-        builder.setMessage(getString(R.string.preferences_error_file));
+        builder.setMessage(getString(R.string.preferences_error_file, getString(R.string.default_file_name)));
         builder.setPositiveButton("OK", null);
         builder.create();
         builder.show();
