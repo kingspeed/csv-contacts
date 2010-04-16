@@ -1,31 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="main_title">CVS Contact</string>
-    <string name="export_button">Export contacts</string>
-    <string name="preferences_button">Preferences</string>
-    <string name="about_button">About</string>
-    <string name="main_button">Back</string>
-    <string name="exit_button">Exit</string>
-    <string name="export_title">Export</string>
-    <string name="export_started">Export started</string>
-    <string name="export_finished">Export finished</string>
-
-    <string name="field_phone">fieldPhone</string>
-    <string name="field_phone_title">Field Phone</string>
-    <string name="field_email">fieldEmail</string>
-    <string name="field_email_title">Field email</string>
-    <string name="field_address">fieldAddress</string>
-    <string name="field_address_title">Field address</string>
-    <string name="field_im">fieldIm</string>
-    <string name="field_im_title">Field im</string>
-    <string name="field_organization">fieldOrganization</string>
-    <string name="field_organization_title">Field organization</string>
-    <string name="field_note">fieldNote</string>
-    <string name="field_note_title">Field note</string>
+    <string name="main_title">CVS Contacts</string>
     
-    <string name="version">Version: 0.1</string>
-    <string name="email">Email: tutexp@gmail.com</string>
-    <string name="bugs">Please feel free to send me your comments, questions and ideas as well as the possible bugs you may get into. Helps are always welcome!</string>
-    <string name="homepage">Homepage: http://code.google.com/p/csv-contacts/</string>
-    <string name="credits">Credits:\nFederico Fernández</string>
+    <string name="field_phone">fieldPhone</string>
+    <string name="field_email">fieldEmail</string>
+    <string name="field_address">fieldAddress</string>
+    <string name="field_im">fieldIm</string>
+    <string name="field_organization">fieldOrganization</string>
+    <string name="field_note">fieldNote</string>
 </resources>
