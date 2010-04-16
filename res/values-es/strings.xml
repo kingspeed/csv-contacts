@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_button">Exportar contactos</string>
+    <string name="preferences_button">Preferencias</string>
+    <string name="about_button">Sobre mí</string>
+    <string name="main_button">Atrás</string>
+    <string name="exit_button">Salir</string>
+    <string name="export_title">Exportar</string>
+
+    <string name="field_phone_title">Teléfonos</string>
+    <string name="field_email_title">Correos electrónicos</string>
+    <string name="field_address_title">Direcciones</string>
+    <string name="field_im_title">Mensajería Instantánea</string>
+    <string name="field_organization_title">Organizaciones</string>
+    <string name="field_note_title">Notas</string>
+    
+    <string name="preferences_fields_title">Campos a exportar</string>
+    <string name="preferences_fields_summary">Seleccione los campos que desee exportar</string>
+    
+    <string name="version">Versión: 0.1</string>
+    <string name="email">Email: tutexp@gmail.com</string>
+    <string name="bugs">Por favor, siéntete libre para enviarme tus comentarios, preguntas, ideas y posibles bugs. ¡La ayuda siempre es bienvenida!</string>
+    <string name="homepage">Página web: http://code.google.com/p/csv-contacts/</string>
+    <string name="credits">Créditos: Federico Fernández</string>
+    
+    <string name="export_pd_summary">Trabajando...</string>
+    <string name="export_pd">Solicitando contactos, exportándolos a CSV y escribiéndolos en un fichero</string>
+    <string name="export_contacts_found">Se encontraron %d contactos</string>
+    <string name="export_error">Es posible que no exista el fichero o esté corrupto</string>
+    <string name="export_error_not_exists">El directorio %s no existe.</string>
+    <string name="export_error_not_writable">No se pudo escribir en el directorio %s.</string>
+    <string name="export_error_exception">Se produjo un error inesperado.</string>
+    <string name="export_finished">Exportación terminada, el fichero se encuentra en %s</string>
+</resources>

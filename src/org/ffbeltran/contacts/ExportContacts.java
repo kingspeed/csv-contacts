@@ -27,14 +27,18 @@ public class ExportContacts extends Activity {
     private ProgressDialog pd;
     private Map<Integer, Boolean> prefs;
     
+    private static final String FOLDER = "/sdcard/download/";
+    private static final String FILE = "contacts.txt";
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.export);
         
         console = (TextView) findViewById(R.id.export_console);
-        pd = ProgressDialog.show(this, "Working..", 
-                "Requesting contacts, exporting to CSV and writing to a file", true, false);
+        String pdSummary = getString(R.string.export_pd_summary);
+        String pdTitle = getString(R.string.export_pd);
+        pd = ProgressDialog.show(this, pdSummary, pdTitle, true, false);
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         prefs = new HashMap<Integer, Boolean>();
@@ -60,8 +64,7 @@ public class ExportContacts extends Activity {
             
             FileManager fm = new FileManager();
             ContactFormatter formatter = new CSVFormatter(prefs);
-            fileResult = fm.createFile(contacts, "/sdcard/download/", 
-                    "contacts.txt", formatter);        
+            fileResult = fm.createFile(contacts, FOLDER, FILE, formatter);        
             
             Button button = (Button) findViewById(R.id.main_button);
             button.setOnClickListener(new Button.OnClickListener() {
@@ -79,22 +82,24 @@ public class ExportContacts extends Activity {
             public void handleMessage(Message msg) {
                 pd.dismiss();
                 StringBuilder sb = new StringBuilder();
-                sb.append("Se encontraron " + numContacts + " contactos\n");
+                sb.append(getString(R.string.export_contacts_found, numContacts));
+                sb.append("\n");
                 boolean fileError = false;
                 if (fileResult == FileManager.ERROR_NOT_EXISTS) {
-                    sb.append("El directorio no existe.");
+                    sb.append(getString(R.string.export_error_not_exists, FOLDER));
                     fileError = true;
                 } else if (fileResult == FileManager.ERROR_NOT_WRITABLE) {
-                    sb.append("No se pudo escribir en el directorio.");
+                    sb.append(getString(R.string.export_error_not_writable, FOLDER));
                     fileError = true;                    
                 } else if (fileResult == FileManager.ERROR_EXCEPTION) {
-                    sb.append("Se produjo un error inesperado.");
+                    sb.append(getString(R.string.export_error_exception));
                     fileError = true;                    
                 }
                 if (fileError) {
-                    sb.append(" Es posible que no exista el fichero o esté corrupto");
+                    sb.append(getString(R.string.export_error));
+                } else {
+                    console.append(getString(R.string.export_finished, FOLDER + FILE));
                 }
-                console.append(getString(R.string.export_finished));
             }
 
         };

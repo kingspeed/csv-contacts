@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_button">Export contacts</string>
+    <string name="preferences_button">Preferences</string>
+    <string name="about_button">About</string>
+    <string name="main_button">Back</string>
+    <string name="exit_button">Exit</string>
+    <string name="export_title">Export</string>
+
+    <string name="field_phone_title">Phones</string>
+    <string name="field_email_title">Emails</string>
+    <string name="field_address_title">Addresses</string>
+    <string name="field_im_title">IM</string>
+    <string name="field_organization_title">Organizations</string>
+    <string name="field_note_title">Notes</string>
+    
+    <string name="preferences_fields_title">Export Fields</string>
+    <string name="preferences_fields_summary">Select the fields to export</string>
+    
+    <string name="version">Version: 0.1</string>
+    <string name="email">Email: tutexp@gmail.com</string>
+    <string name="bugs">Please feel free to send me your comments, questions and ideas as well as the possible bugs you may get into. Helps are always welcome!</string>
+    <string name="homepage">Homepage: http://code.google.com/p/csv-contacts/</string>
+    <string name="credits">Credits:\nFederico Fernández</string>
+    
+    <string name="export_pd_summary">Working...</string>
+    <string name="export_pd">Requesting contacts, exporting to CSV and writing to a file</string>
+    <string name="export_contacts_found">%d contacts was found</string>
+    <string name="export_error">Es posible que no exista el fichero o esté corrupto</string>
+    <string name="export_error_not_exists">El directorio %s no existe.</string>
+    <string name="export_error_not_writable">No se pudo escribir en el directorio %s.</string>
+    <string name="export_error_exception">Se produjo un error inesperado.</string>
+    <string name="export_finished">Export finished. The CSV file is %s</string>
+</resources>

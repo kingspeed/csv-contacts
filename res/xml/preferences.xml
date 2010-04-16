@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceScreen android:summary="Select the fields to export" android:title="Export Fields">
+    <PreferenceScreen 
+        android:summary="@string/preferences_fields_summary" 
+        android:title="@string/preferences_fields_title">
         <CheckBoxPreference 
             android:key="@string/field_phone" 
             android:title="@string/field_phone_title" 
