@@ -42,11 +42,12 @@ public class FileManager {
                 }
             }
         }
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // Placed here to simulate a process time in simulator  
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         return SUCCESS;
     }
 
