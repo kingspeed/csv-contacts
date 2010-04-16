@@ -26,9 +26,9 @@ public class ExportContacts extends Activity {
     private TextView console;
     private ProgressDialog pd;
     private Map<Integer, Boolean> prefs;
+    private String fileName;
     
     private static final String FOLDER = "/sdcard/download/";
-    private static final String FILE = "contacts.txt";
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +42,12 @@ public class ExportContacts extends Activity {
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         prefs = new HashMap<Integer, Boolean>();
-        for (int i = 0; i < Preferences.prefsInt.length; i++) {
-            prefs.put(Preferences.prefsInt[i], 
-                    settings.getBoolean(getString(Preferences.prefsInt[i]), true));
+        for (int i = 0; i < Preferences.PREFS_INT.length; i++) {
+            prefs.put(Preferences.PREFS_INT[i], 
+                    settings.getBoolean(getString(Preferences.PREFS_INT[i]), true));
         }
+        fileName = settings.getString(getString(R.string.file_name), 
+                getString(R.string.default_file_name));
         
         Thread thread = new Thread(new Worker());
         thread.start();
@@ -64,7 +66,7 @@ public class ExportContacts extends Activity {
             
             FileManager fm = new FileManager();
             ContactFormatter formatter = new CSVFormatter(prefs);
-            fileResult = fm.createFile(contacts, FOLDER, FILE, formatter);        
+            fileResult = fm.createFile(contacts, FOLDER, fileName, formatter);        
             
             Button button = (Button) findViewById(R.id.main_button);
             button.setOnClickListener(new Button.OnClickListener() {
@@ -98,7 +100,8 @@ public class ExportContacts extends Activity {
                 if (fileError) {
                     sb.append(getString(R.string.export_error));
                 } else {
-                    console.append(getString(R.string.export_finished, FOLDER + FILE));
+                    String absolutePath = FOLDER + fileName;
+                    console.append(getString(R.string.export_finished, absolutePath));
                 }
             }
 

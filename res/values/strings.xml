@@ -8,4 +8,7 @@
     <string name="field_im">fieldIm</string>
     <string name="field_organization">fieldOrganization</string>
     <string name="field_note">fieldNote</string>
+    
+    <string name="file_name">fileName</string>
+    <string name="default_file_name">contact.csv</string>
 </resources>

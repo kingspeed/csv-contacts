@@ -16,6 +16,12 @@
     
     <string name="preferences_fields_title">Campos a exportar</string>
     <string name="preferences_fields_summary">Seleccione los campos que desee exportar</string>
+    <string name="preferences_error_file">
+        Sólo se permiten letras, números y el guión subrayado en el nombre del fichero.
+        \n Opcionalmente una extensión de dos o tres caracteres
+    </string>
+    <string name="preferences_file_title">Nombre del fichero</string>
+    <string name="preferences_file_summary">Seleccione el nombre del fichero</string>
     
     <string name="version">Versión: 0.1</string>
     <string name="email">Email: tutexp@gmail.com</string>
