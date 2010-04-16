@@ -17,8 +17,7 @@
     <string name="preferences_fields_title">Campos a exportar</string>
     <string name="preferences_fields_summary">Seleccione los campos que desee exportar</string>
     <string name="preferences_error_file">
-        Sólo se permiten letras, números y el guión subrayado en el nombre del fichero.
-        \n Opcionalmente una extensión de dos o tres caracteres
+        Sólo se permiten letras, números y el guión subrayado en el nombre del fichero y opcionalmente una extensión de dos o tres caracteres. Por defecto se utilizará %s
     </string>
     <string name="preferences_file_title">Nombre del fichero</string>
     <string name="preferences_file_summary">Seleccione el nombre del fichero</string>
